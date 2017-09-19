@@ -32,7 +32,7 @@ metadata:
   namespace: kafka-gustavo
 spec:
   serviceName: zookeeper-headless
-  replicas: 3
+  replicas: 5
   template:
     metadata:
       labels:
@@ -51,7 +51,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: zookeeper
-        image: confluentinc/cp-zookeeper:3.2.0
+        image: confluentinc/cp-zookeeper:3.3.0
         # We set ZOOKEEPER_SERVER_ID in a hacky way in command because k8s does
         # not currently makes the index of the pod available. $ZOOKEEPER_SERVERS
         # gets modified so that we replace each replica address with 0.0.0.0
@@ -72,7 +72,7 @@ spec:
         - name: ZOOKEEPER_SYNC_LIMIT
           value: "2"
         - name: ZOOKEEPER_SERVERS
-          value: "zoo-0.zookeeper-headless:2888:3888;zoo-1.zookeeper-headless:2888:3888;zoo-2.zookeeper-headless:2888:3888"
+          value: "zoo-0.zookeeper-headless:2888:3888;zoo-1.zookeeper-headless:2888:3888;zoo-2.zookeeper-headless:2888:3888;zoo-3.zookeeper-headless:2888:3888;zoo-4.zookeeper-headless:2888:3888"
         - name: HOSTNAME
           value: "zoo-0.zookeeper-headless"
         ports:
